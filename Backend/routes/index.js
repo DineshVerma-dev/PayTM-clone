@@ -129,13 +129,14 @@ router.put("/update", jwtmiddleware, async (req, res) => {
     }
 });
 
-router.get("/", jwtmiddleware, async (req, res) => {
+router.get("/bulk", jwtmiddleware, async (req, res) => {
     try {
-        const filter = req.body.filter || "";
+        const filter = req.query.filter || "";
         const users = await UserModel.find({
             $or: [
                 { firstname: { "$regex": filter, "$options": "i" } },
-                { lastname: { "$regex": filter, "$options": "i" } }
+                { lastname: { "$regex": filter, "$options": "i" } },
+                { username: { "$regex": filter, "$options": "i" } }
             ],
 
         })

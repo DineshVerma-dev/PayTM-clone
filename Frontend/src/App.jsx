@@ -1,12 +1,23 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css'
-
+import { Signup } from './pages/Signup';
+import { Signin } from './pages/Signin';
+import { Dashboard } from './pages/Dashboard'
+import { SendMoney } from './pages/SendMoney';
+import {Home} from './pages/Home';
 export default function App() {
   return (
-    <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+    <>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home/>}/>
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/signin" element={<Signin />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/send" element={<SendMoney />} />
+        </Routes>
+      </Router>
+    </>
+
   )
 }
