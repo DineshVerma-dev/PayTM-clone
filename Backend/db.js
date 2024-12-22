@@ -1,8 +1,13 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt'
+import dotenv from "dotenv"
 
+dotenv.config({
+    path: "./.env"
+})
 
-mongoose.connect('mongodb+srv://dineshkumarvermadev:sTR8SoV3LCGU0NWv@cluster0.c15k3.mongodb.net/')
+const mongoURL = process.env.SECRET;
+mongoose.connect(`mongodb+srv://dineshkumarvermadev:${mongoURL}@cluster0.c15k3.mongodb.net`)
     .then(() => {
         console.log('Connected to MongoDB');
     }).catch((err) => {
