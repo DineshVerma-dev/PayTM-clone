@@ -9,7 +9,7 @@ app.use(cors())
 app.use(express.json());
 
 app.use("/api/v1/users", mainRouter);
-app.use("/api/v1/account",accountRouter)
+app.use("/api/v1/account", accountRouter)
 
 // app.get("/", (req, res) => {
 //    res.send("hello world")

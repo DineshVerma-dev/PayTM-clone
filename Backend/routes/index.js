@@ -68,19 +68,23 @@ const signinbody = z.object({
 
 router.post("/signin", async (req, res) => {
     try {
-        // Validate input using signinbody.safeParse
+
         const { success } = signinbody.safeParse(req.body);
         if (!success) {
             return res.status(400).json({ message: "Invalid username or password" });
         }
 
-        // Check if the user exists
+
         const user = await UserModel.findOne({ username: req.body.username });
         if (!user) {
             return res.status(404).json({ message: "User not found" });
         }
 
-        // Generate and return the JWT token
+        const isPasswordCorrect = await user.comparePassword(req.body.password);
+        if (!isPasswordCorrect) {
+            return res.status(401).json({ message: "Invalid username or password" });
+        }
+
         const token = jwt.sign({ userId: user.id }, JWT_SECRET);
         return res.status(200).json({ token: token, userId: user.id });
 
@@ -125,7 +129,7 @@ router.put("/update", jwtmiddleware, async (req, res) => {
     }
 });
 
-router.get("/", async (req, res) => {
+router.get("/", jwtmiddleware, async (req, res) => {
     try {
         const filter = req.body.filter || "";
         const users = await UserModel.find({
