@@ -15,9 +15,9 @@ app.use(express.json());
 app.use("/api/v1/users", mainRouter);
 app.use("/api/v1/account", accountRouter)
 
-// app.get("/", (req, res) => {
-//    res.send("hello world")
-// })
+app.get("/", (req, res) => {
+   res.send("hello world")
+})
 
 app.listen(5000, () => {
     console.log("Server is running on port 5000");
