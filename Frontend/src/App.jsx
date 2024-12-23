@@ -20,7 +20,6 @@
 // export default App;
 
 
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -58,7 +57,7 @@ function App() {
       <main className="flex-1 flex items-center justify-center">
         <div className="text-center px-4">
           <h1 className="text-4xl font-bold mb-4">
-            Welcome to <span className="text-yellow-400">PayTM</span>
+            Welcome to <span className="text-darkblue-900">Pay</span><span className="text-lightblue-400">TM</span>
           </h1>
           <p className="text-lg mb-6">
             Simplify your payments and enjoy seamless transactions.

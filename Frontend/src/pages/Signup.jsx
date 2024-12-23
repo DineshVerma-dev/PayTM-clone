@@ -8,9 +8,10 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export const Signup = () => {
+
   const [username, setUsername] = useState("");
-  const [firstname, setFirstName] = useState("");
-  const [lastname, setLastName] = useState("");
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
@@ -20,22 +21,24 @@ export const Signup = () => {
       return;
     }
 
-    console.log("Sending data:", { username, firstname, lastname, password });
+    const signupData = {
+      username,
+      firstname,
+      lastname,
+      password,
+    };
+
+    console.log("Sending data:", signupData);
 
     try {
-      const response = await axios.post("/api/v1/users/signup", {
-        username,
-        firstname,
-        lastname,
-        password,
-      });
+      const response = await axios.post("/api/v1/users/signup", signupData);
       localStorage.setItem("token", response.data.token);
       navigate("/dashboard");
-      console.log("Sending data:", { username, firstname, lastname, password });
+      console.log("Signup successful:", signupData);
     } catch (error) {
       console.error("Signup failed:", error.response?.data || error.message);
       alert(error.response?.data?.message || "Signup failed!");
-      console.log("Sending data:", { username, firstname, lastname, password });
+      console.log("Signup failed data:", signupData);
     }
   };
 
@@ -51,16 +54,15 @@ export const Signup = () => {
             label={"Username"}
           />
           <InputBox
-            onChange={(e) => setFirstName(e.target.value)}
+            onChange={(e) => setFirstname(e.target.value)}
             placeholder="John"
             label={"First Name"}
           />
           <InputBox
-            onChange={(e) => setLastName(e.target.value)}
+            onChange={(e) => setLastname(e.target.value)}
             placeholder="Doe"
             label={"Last Name"}
           />
-
           <InputBox
             onChange={(e) => setPassword(e.target.value)}
             placeholder="123456"
