@@ -76,7 +76,7 @@ export const Signup = () => {
     console.log("Sending data:", { username, firstname, lastname, password });
 
     try {
-      const response = await axios.post("http://localhost:5000/api/v1/users/signup", {
+      const response = await axios.post("/api/v1/users/signup", {
         username,
         firstname,
         lastname,
