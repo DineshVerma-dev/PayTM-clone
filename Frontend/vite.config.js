@@ -5,7 +5,9 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   server: {
     proxy: {
-      "/api": "https://paytm-backend-pearl.vercel.app"
+      "/api": "https://paytm-backend-pearl.vercel.app/",
+      // "/api"  :"http://localhost:5000/"
+      
     },
   },
   plugins: [react()],
