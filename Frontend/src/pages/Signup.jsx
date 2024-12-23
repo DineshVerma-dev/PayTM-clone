@@ -8,11 +8,11 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export const Signup = () => {
-
   const [username, setUsername] = useState("");
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSignup = async () => {
@@ -21,31 +21,26 @@ export const Signup = () => {
       return;
     }
 
-    const signupData = {
-      username,
-      firstname,
-      lastname,
-      password,
-    };
-
-    console.log("Sending data:", signupData);
+    const signupData = { username, firstname, lastname, password };
 
     try {
+      setLoading(true);
       const response = await axios.post("/api/v1/users/signup", signupData);
       localStorage.setItem("token", response.data.token);
+      alert("Signup successful!");
       navigate("/dashboard");
-      console.log("Signup successful:", signupData);
     } catch (error) {
       console.error("Signup failed:", error.response?.data || error.message);
       alert(error.response?.data?.message || "Signup failed!");
-      console.log("Signup failed data:", signupData);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="bg-slate-300 h-screen flex justify-center">
+    <div className="bg-slate-300 h-screen flex justify-center items-center">
       <div className="flex flex-col justify-center">
-        <div className="rounded-lg bg-white w-80 text-center p-2 h-max px-4">
+        <div className="rounded-lg bg-white sm:w-full md:w-96 text-center p-4 shadow-lg">
           <Heading label={"Sign up"} />
           <SubHeading label={"Enter your information to create an account"} />
           <InputBox
@@ -67,9 +62,14 @@ export const Signup = () => {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="123456"
             label={"Password"}
+            type="password"
           />
           <div className="pt-4">
-            <Button onClick={handleSignup} label={"Sign up"} />
+            <Button
+              onClick={handleSignup}
+              label={loading ? "Signing up..." : "Sign up"}
+              disabled={loading}
+            />
           </div>
           <BottomWarning
             label={"Already have an account?"}
@@ -81,3 +81,4 @@ export const Signup = () => {
     </div>
   );
 };
+

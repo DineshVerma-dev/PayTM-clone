@@ -24,10 +24,10 @@ export const Signin = () => {
         password,
       });
 
-      // Save the token in local storage if login is successful
+      
       localStorage.setItem("token", response.data.token);
 
-      // Navigate to the dashboard or home page
+     
       navigate("/dashboard");
     } catch (error) {
       console.error("Signin failed:", error.response?.data || error.message);
