@@ -7,8 +7,13 @@ import cookieParser from 'cookie-parser';
 const app = express();
 app.use(cookieParser())
 
+const corsOptions = {
+    origin: 'https://paytome.vercel.app', 
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], 
+    credentials: true, 
+  };
 
-app.use(cors())
+app.use(cors(corsOptions))
 
 app.use(express.json());
 
