@@ -1,11 +1,10 @@
-import React from 'react'
+import { Outlet } from 'react-router-dom';
 
-export function Home() {
+export const Home = () => {
   return (
     <div>
-      Home
+      <h1>Welcome to the Home Page</h1>
+      <Outlet /> {/* Renders child routes */}
     </div>
-  )
-}
-
-
+  );
+};
