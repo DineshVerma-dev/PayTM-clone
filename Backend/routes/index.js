@@ -3,7 +3,7 @@ import z from "zod";
 const router = Router();
 import { AccountModel, UserModel } from "../db.js";
 import jwt from "jsonwebtoken"
-import { JWT_SECRET } from "../config.js"
+
 import { jwtmiddleware } from "../middleware.js";
 
 const signupbody = z.object({
@@ -41,7 +41,7 @@ router.post("/signup", async (req, res) => {
 
         const userId = user._id;
 
-        const token = jwt.sign({ userId }, JWT_SECRET, { expiresIn: "1h" });
+        const token = jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: "1h" });
 
         await AccountModel.create({
             userId,
@@ -85,7 +85,7 @@ router.post("/signin", async (req, res) => {
             return res.status(401).json({ message: "Invalid username or password" });
         }
 
-        const token = jwt.sign({ userId: user.id }, JWT_SECRET);
+        const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
         return res.status(200).json({ token: token, userId: user.id });
 
     } catch (error) {
