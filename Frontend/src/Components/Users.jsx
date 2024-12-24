@@ -47,7 +47,7 @@ export const Users = () => {
             {loading && <div className="text-center">Loading...</div>}
             {error && <div className="text-red-500 text-center">{error}</div>}
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                 {users.length === 0 ? (
                     <div className="text-center col-span-full">No users found.</div>
                 ) : (
@@ -76,12 +76,13 @@ function User({ user }) {
                 </div>
             </div>
 
-            <div>
+            <div className="w-full">
                 <Button
                     onClick={() => {
                         navigate("/send?id=" + user._id + "&name=" + user.firstname);
                     }}
                     label={"Send Money"}
+                    className="w-full"
                 />
             </div>
         </div>
