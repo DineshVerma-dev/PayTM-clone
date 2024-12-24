@@ -63,7 +63,7 @@ function User({ user }) {
     const navigate = useNavigate();
 
     return (
-        <div className="flex flex-col justify-between items-center p-4 border rounded-lg shadow-md bg-white">
+        <div className="flex  justify-between items-center p-4 border rounded-lg shadow-md bg-white">
             <div className="flex items-center mb-4">
                 <div className="rounded-full h-12 w-12 bg-slate-200 flex justify-center items-center mr-4">
                     <div className="text-xl font-bold">
