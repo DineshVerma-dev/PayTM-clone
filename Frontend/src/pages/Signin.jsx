@@ -45,23 +45,20 @@ export const Signin = () => {
   };
 
   return (
-    <div className="bg-slate-300 h-screen flex justify-center">
-      <div className="flex flex-col justify-center">
-        <div className="rounded-lg bg-white w-80 text-center p-2 h-max px-4">
+    <div className="bg-slate-300 min-h-screen flex justify-center items-center p-4">
+      <div className="flex flex-col justify-center w-full max-w-md">
+        <div className="rounded-lg bg-white w-full text-center p-6 md:p-8 lg:p-10">
           <Heading label={"Sign in"} />
           <SubHeading label={"Enter your credentials to access your account"} />
 
-          
           {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
 
-          
           <InputBox
             onChange={(e) => setUsername(e.target.value)}
             placeholder="john"
             label={"Username"}
           />
 
-          
           <InputBox
             onChange={(e) => setPassword(e.target.value)}
             placeholder="123456"
@@ -69,7 +66,6 @@ export const Signin = () => {
             type="password"
           />
 
-         
           <div className="pt-4">
             <Button
               onClick={handleSignin}
@@ -78,7 +74,6 @@ export const Signin = () => {
             />
           </div>
 
-         
           <BottomWarning
             label={"Don't have an account?"}
             buttonText={"Sign up"}

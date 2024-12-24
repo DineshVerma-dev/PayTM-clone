@@ -60,7 +60,7 @@ export const SendMoney = () => {
             </p>
             <button
               onClick={() => navigate("/dashboard")} 
-              className="mt-6 bg-green-500 text-white px-6 py-2 rounded-lg"
+              className="mt-6 bg-blue-700 text-white px-6 py-2 rounded-lg"
             >
               Go to Dashboard
             </button>

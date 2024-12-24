@@ -38,9 +38,9 @@ export const Signup = () => {
   };
 
   return (
-    <div className="bg-slate-300 h-screen flex justify-center items-center">
-      <div className="flex flex-col justify-center">
-        <div className="rounded-lg bg-white sm:w-full md:w-96 text-center p-4 shadow-lg">
+    <div className="bg-slate-300 min-h-screen flex justify-center items-center">
+      <div className="flex flex-col justify-center w-full px-4">
+        <div className="rounded-lg bg-white w-full max-w-md mx-auto text-center p-6 shadow-lg">
           <Heading label={"Sign up"} />
           <SubHeading label={"Enter your information to create an account"} />
           <InputBox
@@ -81,4 +81,3 @@ export const Signup = () => {
     </div>
   );
 };
-
