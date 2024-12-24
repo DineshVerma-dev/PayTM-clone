@@ -1,7 +1,7 @@
 import { useSearchParams } from 'react-router-dom';
 import axios from "axios";
 import { useState } from 'react';
-
+import { useNavigate } from "react-router-dom";
 export const SendMoney = () => {
   const [searchParams] = useSearchParams();
   const id = searchParams.get("id");
@@ -10,9 +10,10 @@ export const SendMoney = () => {
   const [message, setMessage] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
 
+
   const handleTransfer = async () => {
     try {
-      const response = await axios.post(
+      await axios.post(
         "https://paytm-backend-pearl.vercel.app/api/v1/account/transfer",
         { to: id, amount },
         {
@@ -28,7 +29,7 @@ export const SendMoney = () => {
       setMessage("Transfer failed. Please try again.");
     }
   };
-
+  const navigate = useNavigate();
   if (isSuccess) {
     // Success screen
     return (
@@ -58,7 +59,7 @@ export const SendMoney = () => {
               You have successfully transferred Rs. {amount} to {name}.
             </p>
             <button
-              onClick={() => window.location.href = "/dashboard"} // Redirect to dashboard
+              onClick={() => navigate("/dashboard")} 
               className="mt-6 bg-green-500 text-white px-6 py-2 rounded-lg"
             >
               Go to Dashboard
@@ -110,8 +111,8 @@ export const SendMoney = () => {
               {message && (
                 <div
                   className={`mt-4 p-2 text-center rounded-md ${message.includes("successful")
-                      ? "bg-green-100 text-green-700"
-                      : "bg-red-100 text-red-700"
+                    ? "bg-green-100 text-green-700"
+                    : "bg-red-100 text-red-700"
                     }`}
                 >
                   {message}
