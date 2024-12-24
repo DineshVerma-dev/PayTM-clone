@@ -13,7 +13,7 @@ export const SendMoney = () => {
   const handleTransfer = async () => {
     try {
       const response = await axios.post(
-        "/api/v1/account/transfer",
+        "https://paytm-backend-pearl.vercel.app/api/v1/account/transfer",
         { to: id, amount },
         {
           headers: {

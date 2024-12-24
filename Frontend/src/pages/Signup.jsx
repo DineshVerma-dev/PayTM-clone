@@ -25,7 +25,7 @@ export const Signup = () => {
 
     try {
       setLoading(true);
-      const response = await axios.post("/api/v1/users/signup", signupData);
+      const response = await axios.post("https://paytm-backend-pearl.vercel.app/api/v1/users/signup", signupData);
       localStorage.setItem("token", response.data.token);
       alert("Signup successful!");
       navigate("/dashboard");
