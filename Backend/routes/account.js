@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 
 const router = Router();
 
-router.get("/", jwtmiddleware, async (req, res) => {
+router.get("/check", jwtmiddleware, async (req, res) => {
     const getuserBalance = await AccountModel.findOne({ userId: req.userId });
 
     if (getuserBalance) {

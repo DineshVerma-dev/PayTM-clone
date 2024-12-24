@@ -10,7 +10,7 @@ export const Dashboard = () => {
     useEffect(() => {
         const fetchBalance = async () => {
             try {
-                const response = await axios.get("https://paytm-backend-pearl.vercel.app/api/v1/account/", {
+                const response = await axios.get("https://paytm-backend-pearl.vercel.app/api/v1/account/check", {
                     headers: {
                         Authorization: "Bearer " + localStorage.getItem("token")
                     }
