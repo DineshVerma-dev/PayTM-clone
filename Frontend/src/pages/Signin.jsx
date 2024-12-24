@@ -46,8 +46,8 @@ export const Signin = () => {
 
   return (
     <div className="bg-slate-300 min-h-screen flex justify-center items-center p-4">
-      <div className="flex flex-col justify-center w-full max-w-md">
-        <div className="rounded-lg bg-white w-full text-center p-6 md:p-8 lg:p-10">
+      <div className="flex flex-col justify-center w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl">
+        <div className="rounded-lg bg-white w-full text-center p-6 sm:p-8 md:p-10 lg:p-12">
           <Heading label={"Sign in"} />
           <SubHeading label={"Enter your credentials to access your account"} />
 

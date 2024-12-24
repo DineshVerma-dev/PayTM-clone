@@ -31,30 +31,30 @@ export const Users = () => {
     }, [filter]);
 
     return (
-        <>
-            <div className="font-bold mt-6 text-lg">
+        <div className="container mx-auto p-4">
+            <div className="font-bold mt-6 text-lg text-center">
                 Users
             </div>
-            <div className="my-2">
+            <div className="my-4">
                 <input
                     onChange={(e) => setFilter(e.target.value)}
                     type="text"
                     placeholder="Search users..."
-                    className="w-full px-2 py-1 border rounded border-slate-200"
+                    className="w-full px-4 py-2 border rounded border-slate-300"
                 />
             </div>
 
-            {loading && <div>Loading...</div>}
-            {error && <div className="text-red-500">{error}</div>}
+            {loading && <div className="text-center">Loading...</div>}
+            {error && <div className="text-red-500 text-center">{error}</div>}
 
-            <div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {users.length === 0 ? (
-                    <div>No users found.</div>
+                    <div className="text-center col-span-full">No users found.</div>
                 ) : (
                     users.map(user => <User key={user._id} user={user} />)
                 )}
             </div>
-        </>
+        </div>
     );
 };
 
@@ -62,15 +62,15 @@ function User({ user }) {
     const navigate = useNavigate();
 
     return (
-        <div className="flex flex-col md:flex-row justify-between items-center p-4 border-b border-slate-200">
-            <div className="flex items-center mb-4 md:mb-0">
-                <div className="rounded-full h-12 w-12 bg-slate-200 flex justify-center items-center mr-2">
-                    <div className="text-xl">
+        <div className="flex flex-col justify-between items-center p-4 border rounded-lg shadow-md bg-white">
+            <div className="flex items-center mb-4">
+                <div className="rounded-full h-12 w-12 bg-slate-200 flex justify-center items-center mr-4">
+                    <div className="text-xl font-bold">
                         {user.firstname[0]}
                     </div>
                 </div>
                 <div>
-                    <div className="text-center md:text-left">
+                    <div className="text-center md:text-left font-semibold">
                         {user.firstname} {user.lastname}
                     </div>
                 </div>
