@@ -14,7 +14,7 @@ export const Users = () => {
             setLoading(true);
             setError(""); // Reset error on new request
             try {
-                const response = await axios.get("/api/v1/users/bulk?filter=" + filter, {
+                const response = await axios.get("https://paytm-backend-pearl.vercel.app/api/v1/users/bulk?filter=" + filter, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
                     }
