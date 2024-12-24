@@ -10,7 +10,7 @@ app.use(cookieParser())
 const corsOptions = {
     origin: 'https://paytome.vercel.app', 
     // origin :"http://localhost:5173/",
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], 
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH' ,'HEAD'], 
     credentials: true, 
   };
 
