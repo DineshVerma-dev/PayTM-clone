@@ -11,7 +11,7 @@ import { SendMoney } from './pages/SendMoney';
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App/>
+    element: <App />
   },
 
   {
