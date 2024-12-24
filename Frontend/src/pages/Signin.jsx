@@ -10,28 +10,37 @@ import { useNavigate } from "react-router-dom";
 export const Signin = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false); 
+  const [error, setError] = useState(""); 
   const navigate = useNavigate();
 
   const handleSignin = async () => {
+    setError(""); 
     if (!username || !password) {
-      alert("Both fields are required!");
+      setError("Both fields are required!");
       return;
     }
 
+    setLoading(true); 
     try {
-      const response = await axios.post("https://paytm-backend-pearl.vercel.app/api/v1/users/signin", {
-        username,
-        password,
-      });
+      const response = await axios.post(
+        "https://paytm-backend-pearl.vercel.app/api/v1/users/signin",
+        {
+          username,
+          password,
+        }
+      );
 
-      
       localStorage.setItem("token", response.data.token);
 
-     
       navigate("/dashboard");
     } catch (error) {
       console.error("Signin failed:", error.response?.data || error.message);
-      alert("Invalid credentials, please try again.");
+      setError(
+        error.response?.data?.message || "Invalid credentials, please try again."
+      );
+    } finally {
+      setLoading(false); 
     }
   };
 
@@ -42,14 +51,17 @@ export const Signin = () => {
           <Heading label={"Sign in"} />
           <SubHeading label={"Enter your credentials to access your account"} />
 
-          {/* Username Input */}
+          
+          {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
+
+          
           <InputBox
             onChange={(e) => setUsername(e.target.value)}
             placeholder="john"
             label={"Username"}
           />
 
-          {/* Password Input */}
+          
           <InputBox
             onChange={(e) => setPassword(e.target.value)}
             placeholder="123456"
@@ -57,12 +69,16 @@ export const Signin = () => {
             type="password"
           />
 
-          {/* Signin Button */}
+         
           <div className="pt-4">
-            <Button onClick={handleSignin} label={"Sign in"} />
+            <Button
+              onClick={handleSignin}
+              label={loading ? "Signing in..." : "Sign in"} 
+              disabled={loading} 
+            />
           </div>
 
-          {/* Bottom Warning for Signup */}
+         
           <BottomWarning
             label={"Don't have an account?"}
             buttonText={"Sign up"}
