@@ -11,24 +11,6 @@ export const SendMoney = () => {
   const [isSuccess, setIsSuccess] = useState(false);
 
 
-  const handleTransfer = async () => {
-    try {
-      await axios.post(
-        "https://paytm-backend-pearl.vercel.app/api/v1/account/transfer",
-        { to: id, amount },
-        {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
-          },
-        }
-      );
-      setIsSuccess(true);
-      setMessage("Transfer successful!");
-    } catch (error) {
-      console.error("Error during transfer:", error);
-      setMessage("Transfer failed. Please try again.");
-    }
-  };
   const navigate = useNavigate();
   if (isSuccess) {
     // Success screen
@@ -70,6 +52,30 @@ export const SendMoney = () => {
     );
   }
 
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleTransfer = async () => {
+    setIsLoading(true);
+    try {
+      await axios.post(
+        "https://paytm-backend-pearl.vercel.app/api/v1/account/transfer",
+        { to: id, amount },
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      );
+      setIsSuccess(true);
+      setMessage("Transfer successful!");
+    } catch (error) {
+      console.error("Error during transfer:", error);
+      setMessage("Transfer failed. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="flex justify-center h-screen bg-gray-100">
       <div className="h-full flex flex-col justify-center">
@@ -105,8 +111,9 @@ export const SendMoney = () => {
               <button
                 onClick={handleTransfer}
                 className="justify-center rounded-md text-sm font-medium ring-offset-background transition-colors h-10 px-4 py-2 w-full bg-green-500 text-white"
+                disabled={isLoading}
               >
-                Initiate Transfer
+                {isLoading ? "Processing..." : "Initiate Transfer"}
               </button>
               {message && (
                 <div
